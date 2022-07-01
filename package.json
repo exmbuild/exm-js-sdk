@@ -1,0 +1,23 @@
+{
+  "name": "em-js-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/three-em/em-js-sdk.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/three-em/em-js-sdk/issues"
+  },
+  "homepage": "https://github.com/three-em/em-js-sdk#readme",
+  "dependencies": {
+    "@types/node": "^18.0.0",
+    "isomorphic-fetch": "^3.0.0"
+  }
+}
