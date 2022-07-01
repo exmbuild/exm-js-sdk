@@ -21,6 +21,10 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: Arra
 
     body.inputs = Array.isArray(writeOps) ? writeOps : [writeOps];
 
+    if(body.inputs.length > 499) {
+        throw new WriteOpFailure("Only 499 writes are allowed in a single query.");
+    }
+
     const data = await postRequest(`${EmVars.EM_BACKEND_URL}/transactions?token=${emToken}`, body);
     let bodyJson = await data.json();
 
