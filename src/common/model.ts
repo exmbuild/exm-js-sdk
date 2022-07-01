@@ -27,3 +27,7 @@ export interface WriteOpResult<T = any> {
         }
     }
 }
+
+export interface ReadResult<T = any> {
+    state: T;
+}
