@@ -31,10 +31,10 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: Arra
     if(data.ok) {
         return bodyJson as WriteOpResult<T>
     } else {
-        if(bodyJson && bodyJson.status === 'FAILED') {
-            throw new WriteOpFailure(`${data.status}: Write operation for function ${functionId} could not be sent. "${bodyJson.message}"`);
-        } else if(bodyJson && bodyJson.statusCode && bodyJson.error && bodyJson.message) {
+        if(bodyJson && bodyJson.statusCode && bodyJson.error && bodyJson.message) {
             throw new WriteOpFailure(`500: Internal server error while sending write operation to function ${functionId}. "Error: ${bodyJson.message}"`);
+        } else {
+            throw new WriteOpFailure(`${data.status}: Something went wrong, write operation for function ${functionId} could not be sent.`);
         }
     }
 }
