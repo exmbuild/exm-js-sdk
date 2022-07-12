@@ -1,5 +1,5 @@
 {
-  "name": "em-js-sdk",
+  "name": "@execution-machine/sdk",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

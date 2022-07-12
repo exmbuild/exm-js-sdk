@@ -26,7 +26,7 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: Arra
     }
 
     const data = await postRequest(`${EmVars.EM_BACKEND_URL}/transactions?token=${emToken}`, body);
-    let bodyJson = await data.json();
+    let bodyJson: any = await data.json();
 
     if(data.ok) {
         return bodyJson as WriteOpResult<T>
