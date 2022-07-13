@@ -18,8 +18,10 @@
   "homepage": "https://github.com/three-em/em-js-sdk#readme",
   "dependencies": {
     "@types/node": "^18.0.0",
+    "arweave": "^1.11.4",
     "commander": "^9.3.0",
     "dotenv": "^16.0.1",
-    "isomorphic-fetch": "^3.0.0"
+    "isomorphic-fetch": "^3.0.0",
+    "prompt-confirm": "^2.0.4"
   }
 }

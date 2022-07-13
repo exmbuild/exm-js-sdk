@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import {functionReadCmd} from "./cmd/functions/read";
 import {functionWriteCmd} from "./cmd/functions/write";
+import {functionDeployCmd} from "./cmd/functions/deploy";
 
 const program = new Command();
 
@@ -22,5 +23,16 @@ program.command('function:write')
     .option('-t, --tags <value>', 'Tags to be used during write operation evaluation. Usage: --tags tag1=value1 --tags tag2="value 2"', (value: string, previous: string[]) => previous.concat([value]), [])
     .option('-t, --token <value>', 'Execution Machine API Token to be used.')
     .action(functionWriteCmd);
+
+program.command('function:deploy')
+    .alias('fx:d')
+    .description('Deploy a EXM compatible function to Arweave.')
+    .requiredOption('-w, --wallet <value>', 'Path to wallet to be used during deployment.')
+    .option('-s, --src <value>', 'Path to source contract of function. Example: /Documents/contract.wasm .')
+    .option('--contract-tx <value>', 'ID of Source Contract already deployed to Arweave.')
+    .option('-i, --init-state <value>', 'Init State for contract to be deployed under init contract.')
+    .option('--init-state-src <value>', 'Path to init state file.')
+    .option('-t, --type <value>', 'Type of smart contract to be deployed.')
+    .action(functionDeployCmd);
 
 program.parse(process.argv);
