@@ -1,5 +1,5 @@
 export class WriteOpFailure extends Error {
-    constructor(message: string) {
+    constructor(message: string, public statusCode?: number) {
         super(message);
     }
 }

@@ -32,7 +32,7 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: Arra
         return bodyJson as WriteOpResult<T>
     } else {
         if(bodyJson && bodyJson.statusCode && bodyJson.error && bodyJson.message) {
-            throw new WriteOpFailure(`500: Internal server error while sending write operation to function ${functionId}. "Error: ${bodyJson.message}"`);
+            throw new WriteOpFailure(`${bodyJson.statusCode}: Internal server error while sending write operation to function ${functionId}. "Error: ${bodyJson.message}"`, bodyJson.statusCode);
         } else {
             throw new WriteOpFailure(`${data.status}: Something went wrong, write operation for function ${functionId} could not be sent.`);
         }

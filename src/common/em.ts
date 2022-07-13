@@ -10,6 +10,17 @@ export class Em {
         }
     }
 
+    /**
+     * Changes the token passed in constructor
+     * @param token
+     */
+    changeToken(token: string) {
+        this.opts.token = token;
+    }
+
+    /**
+     * Gets the methods related to EXM Functions product
+     */
     get functions() {
         return {
             write: async <T = any>(functionId: string, writeOps: Array<WriteAction> | WriteAction) => writeFunction<T>(functionId, writeOps, this.opts.token),
