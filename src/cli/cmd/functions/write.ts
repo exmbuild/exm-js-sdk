@@ -27,7 +27,7 @@ export const functionWriteCmd = async (txId: string, opts: any) => {
             input,
             tags: tagsArray
         }
-    ]).then(({ data: { pseudoId, execution: { validity } } }) => {
+    ]).then(({ data: { pseudoId, execution: { state, validity } } }) => {
         if (validity[pseudoId]) {
             console.log(
                 `Write query ${pseudoId} (pseudo-id) was successfully executed`,
@@ -37,9 +37,16 @@ export const functionWriteCmd = async (txId: string, opts: any) => {
                 `Write query ${pseudoId} (pseudo-id) could not be executed`,
             );
         }
+        if(opts.showOutput) {
+            console.log(`\n${JSON.stringify({ state, validity}, null, 2)}`)
+        }
     }).catch((e) => {
         if(e instanceof WriteOpFailure) {
-            console.log('403: Write operation could not be completed because the resource could not be accessed or token is invalid.');
+            if(e.statusCode === 403) {
+                console.log('403: Write operation could not be completed because the resource could not be accessed or token is invalid.');
+            } else {
+                console.error(e.message);
+            }
         } else {
             console.error(e.message);
         }

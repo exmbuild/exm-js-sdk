@@ -22,6 +22,7 @@ program.command('function:write')
     .requiredOption('-i, --input <value>', 'Input to be passed to the function')
     .option('-t, --tags <value>', 'Tags to be used during write operation evaluation. Usage: --tags tag1=value1 --tags tag2="value 2"', (value: string, previous: string[]) => previous.concat([value]), [])
     .option('-t, --token <value>', 'Execution Machine API Token to be used.')
+    .option('--show-output', 'Show optimistic execution output from write operation')
     .action(functionWriteCmd);
 
 program.command('function:deploy')
