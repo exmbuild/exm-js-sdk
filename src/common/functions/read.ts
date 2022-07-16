@@ -3,7 +3,7 @@ import {EmVars} from "../vars";
 import {ReadFailure} from "../exceptions/readFailure";
 
 /**
- * This function allows you to read the state of a function being used in EM (Execution Machine)
+ * This method allows you to read the state of a function being used in EM (Execution Machine)
  * No token is needed since states are technically public from an evaluation perspective
  *
  * @param functionId The function ID (An Arweave valid TX id) to obtain the state for

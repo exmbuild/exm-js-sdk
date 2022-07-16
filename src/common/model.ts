@@ -37,3 +37,18 @@ export interface WriteOpResult<T = any> {
 export interface ReadResult<T = any> {
     state: T;
 }
+
+export interface DeployOpBody {
+    contractSrc: Array<number>;
+    contentType: string;
+    initState: string;
+    contractOwner?: string;
+}
+
+export interface DeployOpResult {
+    id: string;
+}
+
+export interface DeployOpts {
+    ownerAddress?: string;
+}

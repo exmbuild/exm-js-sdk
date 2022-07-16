@@ -4,7 +4,7 @@ import {WriteAction, WriteOpBody, WriteOpResult} from "../model";
 import {WriteOpFailure} from "../exceptions/writeOpFailure";
 
 /**
- * This functions allows you to execute write operations inside EM Trustless, Serverless Functions.
+ * This method allows you to execute write operations inside EM Trustless, Serverless Functions.
  * By requesting to the module `em-backend`, it creates a write operation which will be automatically processed.
  * Note that the result returned by this function is optimistic as the final processing for the global state of the function
  * Might take a few more seconds in order for it to be available and propagated.

@@ -28,12 +28,14 @@ program.command('function:write')
 program.command('function:deploy')
     .alias('fx:d')
     .description('Deploy a EXM compatible function to Arweave.')
-    .requiredOption('-w, --wallet <value>', 'Path to wallet to be used during deployment.')
+    .option('-w, --wallet <value>', 'Path to wallet to be used during deployment.')
     .option('-s, --src <value>', 'Path to source contract of function. Example: /Documents/contract.wasm .')
     .option('--contract-tx <value>', 'ID of Source Contract already deployed to Arweave.')
     .option('-i, --init-state <value>', 'Init State for contract to be deployed under init contract.')
     .option('--init-state-src <value>', 'Path to init state file.')
     .option('-t, --type <value>', 'Type of smart contract to be deployed.')
+    .option('-t, --token <value>', 'Execution Machine API Token to be used.')
+    .option('--use-arweave', 'Deploy function through Arweave and not EXM')
     .action(functionDeployCmd);
 
 program.parse(process.argv);
