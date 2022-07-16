@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deliver": "npm run build && npm publish"
+    "deliver": "npm run build && npm publish --access public"
   },
   "bin": {
     "exm": "dist/cli/index.js",
