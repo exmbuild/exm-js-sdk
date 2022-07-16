@@ -40,29 +40,31 @@ const successfulDeployment = (sourceTxId: string, initTxId: string) => {
     console.log(`\nUse Smart Contract Id ${initTxId} as your interaction reference.`);
 }
 
-const figureOutContractType = (input: string, byType: boolean): ContractType => {
+const figureOutContractType = (input: string | undefined, byType: boolean): ContractType => {
     let contentType: ContractType = ContractType.JS;
-    const lowerCaseInput = input.toLowerCase();
+    if(input) {
+        const lowerCaseInput = input.toLowerCase();
 
-    if(byType) {
-        switch (lowerCaseInput) {
-            case "wasm":
-                contentType = ContractType.WASM;
-                break;
-            case "evm":
-                contentType = ContractType.EVM;
-                break;
-            case "js":
-                contentType = ContractType.JS;
-                break;
-        }
-    } else {
-        if (lowerCaseInput.endsWith(".js")) {
-            contentType = ContractType.JS;
-        } else if (lowerCaseInput.endsWith(".wasm")) {
-            contentType = ContractType.WASM;
+        if (byType) {
+            switch (lowerCaseInput) {
+                case "wasm":
+                    contentType = ContractType.WASM;
+                    break;
+                case "evm":
+                    contentType = ContractType.EVM;
+                    break;
+                case "js":
+                    contentType = ContractType.JS;
+                    break;
+            }
         } else {
-            contentType = ContractType.JS;
+            if (lowerCaseInput.endsWith(".js")) {
+                contentType = ContractType.JS;
+            } else if (lowerCaseInput.endsWith(".wasm")) {
+                contentType = ContractType.WASM;
+            } else {
+                contentType = ContractType.JS;
+            }
         }
     }
 
