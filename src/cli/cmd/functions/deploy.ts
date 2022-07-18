@@ -35,9 +35,10 @@ const error = (message: string) => {
 
 const successfulDeployment = (sourceTxId: string, initTxId: string) => {
     console.log("Contract deployed 🎉\n");
-    console.log("Contract Source:", "https://arweave.net/tx/" + sourceTxId);
-    console.log("Smart Contract:", "https://arweave.net/tx/" + initTxId);
-    console.log(`\nUse Smart Contract Id ${initTxId} as your interaction reference.`);
+    console.log(`EXM Function ID: ${initTxId}`);
+    console.log("EXM Function Source Code:", "https://arweave.net/tx/" + sourceTxId);
+    console.log("EXM Function:", "https://arweave.net/tx/" + initTxId);
+    console.log(`\nUse Function Id ${initTxId} as your interaction reference.`);
 }
 
 const figureOutContractType = (input: string | undefined, byType: boolean): ContractType => {
@@ -188,7 +189,8 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
 
             const beginDeployment = await em.functions.deploy(contractData, initState, contentType);
             console.log(`Contract deployed 🎉\n`);
-            console.log(`EXM Contract: https://arweave.net/${beginDeployment.id}`);
+            console.log(`EXM Function ID: ${beginDeployment.id}`);
+            console.log(`EXM Function: https://arweave.net/${beginDeployment.id}`);
         }
     }
 }
