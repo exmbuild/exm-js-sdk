@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.0-alpha",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,14 +15,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/three-em/em-js-sdk.git"
+    "url": "git+https://github.com/exmbuild/exm-js-sdk.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/three-em/em-js-sdk/issues"
+    "url": "https://github.com/exmbuild/exm-js-sdk/issues"
   },
-  "homepage": "https://github.com/three-em/em-js-sdk#readme",
+  "homepage": "https://github.com/exmbuild/exm-js-sdk#readme",
   "dependencies": {
     "@types/node": "^18.0.0",
     "arweave": "^1.11.4",
