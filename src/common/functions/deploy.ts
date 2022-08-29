@@ -13,14 +13,24 @@ import {DeployOpFailure} from "../exceptions/deployOpFailure";
  * @param emToken EM Token to authenticate request
  * @param opts Options for deployment
  */
-export const deployFunction = async(contractSrc: Uint8Array, contractInitState: string, contractType: ContractType, emToken: string, opts?: DeployOpts) => {
+export const deployFunction = async(contractSrc: Uint8Array, contractInitState: any, contractType: ContractType, emToken: string, opts?: DeployOpts) => {
     try {
         const bytes = Array.from(contractSrc.values());
         const body: Partial<DeployOpBody> = {
             contractSrc: bytes
         };
         body.contentType = contractType || ContractType.JS;
-        body.initState = contractInitState;
+        let initState = '{}';
+
+        if(contractInitState) {
+            if(typeof contractInitState === 'object') {
+                initState = JSON.stringify(contractInitState);
+            } else {
+                initState = String(contractInitState);
+            }
+        }
+
+        body.initState = initState;
         body.contractOwner = (opts || {}).ownerAddress || "";
 
         const data = await postRequest(`${EmVars.EM_BACKEND_URL}/contract/deploy?token=${emToken}`, body);

@@ -3,6 +3,17 @@ import {postRequest} from "../utils/commons";
 import {WriteAction, WriteOpBody, WriteOpResult} from "../model";
 import {WriteOpFailure} from "../exceptions/writeOpFailure";
 
+const cleanInput = (writeAction: WriteAction) => {
+    if(!writeAction.input) {
+        throw new Error(`Property 'input' is required in a write operation`);
+    }
+    if(!writeAction.tags) {
+        writeAction.tags = [];
+    }
+
+    return writeAction;
+}
+
 /**
  * This method allows you to execute write operations inside EM Trustless, Serverless Functions.
  * By requesting to the module `em-backend`, it creates a write operation which will be automatically processed.
@@ -13,13 +24,35 @@ import {WriteOpFailure} from "../exceptions/writeOpFailure";
  * @param functionId The function ID (An Arweave valid TX id) to be processed
  * @param writeOps A single operation or an array of operations to be sent. Note a limit of 499 write operations are enforced.
  * @param emToken EM Token to authenticate request
+ * @param raw Whether it's a write input or an input to be constructed.
  */
-export const writeFunction = async <T = any> (functionId: string, writeOps: Array<WriteAction> | WriteAction, emToken: string): Promise<WriteOpResult<T>> => {
+export const writeFunction = async <T = any> (functionId: string, writeOps: any, emToken: string, raw: boolean): Promise<WriteOpResult<T>> => {
     let body: Partial<WriteOpBody> = {
         functionId
     };
 
-    body.inputs = Array.isArray(writeOps) ? writeOps : [writeOps];
+    let inputs: WriteAction[] = [];
+
+    if(raw) {
+        let writeOpsScope: WriteAction | WriteAction[] = writeOps;
+        if(Array.isArray(writeOpsScope)) {
+            writeOpsScope.forEach((i, index) => {
+                writeOpsScope[index] = cleanInput(i);
+            });
+        } else {
+            writeOpsScope = cleanInput(writeOpsScope);
+        }
+
+        inputs = Array.isArray(writeOpsScope) ? writeOpsScope : [writeOpsScope];
+    } else {
+        if(Array.isArray(writeOps)) {
+            inputs = writeOps.map((i) => ({ input: i, tags: [] }));
+        } else {
+            inputs = [{ input: writeOps, tags: [] }]
+        }
+    }
+
+    body.inputs = inputs;
 
     if(body.inputs.length > 499) {
         throw new WriteOpFailure("Only 499 writes are allowed in a single query.");

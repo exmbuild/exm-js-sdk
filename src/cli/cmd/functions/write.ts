@@ -22,7 +22,7 @@ export const functionWriteCmd = async (txId: string, opts: any) => {
         em.changeToken(opts.token);
     }
 
-    await em.functions.write(txId, [
+    await em.functions.writeRaw(txId, [
         {
             input,
             tags: tagsArray
