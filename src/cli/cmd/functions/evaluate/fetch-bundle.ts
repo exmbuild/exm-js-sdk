@@ -17,7 +17,12 @@ export const cacheBundle = async (bundleId: string, cache?: boolean): Promise<Bu
     if(fetchBundle.ok) {
         const bundleData = await fetchBundle.json();
         if (cache) {
-            writeFile(path.join(__cacheDir, `${bundleId}.json`), JSON.stringify(bundleData), () => {});
+            if(__cacheDir) {
+                writeFile(path.join(__cacheDir, `${bundleId}.json`), JSON.stringify(bundleData), () => {
+                });
+            } else {
+                console.log(`Cache Dir not found. Skipping ⏭️\n`);
+            }
         }
         return bundleData;
     }
