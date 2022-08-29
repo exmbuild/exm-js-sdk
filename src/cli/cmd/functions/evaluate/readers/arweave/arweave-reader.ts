@@ -16,11 +16,11 @@ export class ArweaveReader implements ReaderInterface<Paginator, String> {
         return jsonResp.data.transactions.edges.map((i) => ({
             id: i.node.id,
             pseudoTimestamp: Number(i.node.tags.find((tag) => tag.name === 'Pseudo-Timestamp')!.value),
-            functionId: i.node.tags.find((tag) => tag.name === 'Function')!.value,
-            blockHeight: i.node.block.height,
-            threeEmExecutorVersion: i.node.tags.find((tag) => tag.name === '3EM-Executor-Version')?.value!,
+            functionId: (i.node?.tags || []).find((tag) => tag.name === 'Function')!.value,
+            blockHeight: i.node?.block?.height || 0,
+            threeEmExecutorVersion: (i.node?.tags || []).find((tag) => tag.name === '3EM-Executor-Version')?.value!,
             after: i.cursor,
-            isExmFunctionExmDeployed: i.node.tags.find((tag) => tag.name === '3EM-Function-Deployed')?.value === 'true' || true
+            isExmFunctionExmDeployed: (i.node?.tags || []).find((tag) => tag.name === '3EM-Function-Deployed')?.value === 'true' || true
         }));
     }
 
