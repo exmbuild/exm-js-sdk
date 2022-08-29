@@ -34,7 +34,7 @@ const error = (message: string) => {
 }
 
 const successfulDeployment = (sourceTxId: string, initTxId: string) => {
-    console.log("Contract deployed 🎉\n");
+    console.log("Function deployed 🎉\n");
     console.log(`EXM Function ID: ${initTxId}`);
     console.log("EXM Function Source Code:", "https://arweave.net/tx/" + sourceTxId);
     console.log("EXM Function:", "https://arweave.net/tx/" + initTxId);
@@ -103,14 +103,14 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
             console.log("Deploying contract using source transaction", opts.contractTx);
 
             const initDeploymentTx = await initContract(initState, opts.contractTx, wallet, arweave);
-            console.log("\nInit Contract:", initDeploymentTx[1]);
+            console.log("\nInit Function:", initDeploymentTx[1]);
 
             const doDeploy = await new Confirm('Do you want to deploy this function?').run();
 
             if (doDeploy) {
                 const res = await arweave.transactions.post(initDeploymentTx[0]);
                 if (res.status >= 400) {
-                    error(`Failed to deploy init contract. Source Contract ID: ${opts.contractTx}`);
+                    error(`Failed to deploy init Function. Source Function ID: ${opts.contractTx}`);
                 }
 
                 successfulDeployment(opts.contractTx, initDeploymentTx[1].id);
@@ -149,7 +149,7 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
                 } else {
                     const initContractDeployment = await arweave.transactions.post(txInit[0]);
                     if (initContractDeployment.status >= 400) {
-                        error(`Failed to init contract. Source Contract ID: ${txSource.id}`);
+                        error(`Failed to init function. Source function ID: ${txSource.id}`);
                     }
                 }
 
@@ -164,7 +164,7 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
         let contractData: Uint8Array;
 
         if(!opts.token) {
-            error('EXM Token (--token) is required to deploy contracts through EXM');
+            error('EXM Token (--token) is required to deploy functions through EXM');
         }
 
         if(opts.contractTx) {
@@ -172,7 +172,7 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
             if(fetchContractSourceTx.ok) {
                 contractData = new Uint8Array(await fetchContractSourceTx.arrayBuffer());
             } else {
-                console.error(`Source contract transaction ${opts.contractTx} is invalid or does not exist.`);
+                console.error(`Source function transaction ${opts.contractTx} is invalid or does not exist.`);
             }
         } else if(opts.src) {
             contractData = await readFileSync(opts.src);
@@ -188,7 +188,7 @@ export const functionDeployCmd = async (opts: DeployOpts) => {
             }
 
             const beginDeployment = await em.functions.deploy(contractData, initState, contentType);
-            console.log(`Contract deployed 🎉\n`);
+            console.log(`Function deployed 🎉\n`);
             console.log(`EXM Function ID: ${beginDeployment.id}`);
             console.log(`EXM Function: https://arweave.net/${beginDeployment.id}`);
         }

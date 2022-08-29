@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,10 @@
     "arweave": "^1.11.4",
     "commander": "^9.3.0",
     "dotenv": "^16.0.1",
+    "find-cache-dir": "^3.3.2",
     "isomorphic-fetch": "^3.0.0",
-    "prompt-confirm": "^2.0.4"
+    "prompt-confirm": "^2.0.4",
+    "three-em-0-3-12": "npm:@three-em/node@^0.3.12",
+    "three-em-0-3-09": "npm:@three-em/node@^0.3.09"
   }
 }

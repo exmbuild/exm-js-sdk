@@ -2,6 +2,7 @@ import { Command } from "commander";
 import {functionReadCmd} from "./cmd/functions/read";
 import {functionWriteCmd} from "./cmd/functions/write";
 import {functionDeployCmd} from "./cmd/functions/deploy";
+import {evaluateExmFunction} from "./cmd/functions/evaluate/evaluate";
 
 const program = new Command();
 
@@ -37,5 +38,11 @@ program.command('function:deploy')
     .option('-t, --token <value>', 'Execution Machine API Token to be used.')
     .option('--use-arweave', 'Deploy function through Arweave and not EXM')
     .action(functionDeployCmd);
+
+program.command('function:evaluate')
+    .alias('fx:e')
+    .description('Evaluates the state of an EXM application')
+    .argument('<txId>', 'ID of deployed function')
+    .action(evaluateExmFunction);
 
 program.parse(process.argv);
