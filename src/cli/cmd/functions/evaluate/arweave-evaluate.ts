@@ -28,7 +28,7 @@ export const arweaveEvaluate = async (opts: CommonEvaluateOpts) => {
             state = (await runExmdApp(bundleElement.threeEmExecutorVersion)(
                 opts.exmFunctionId,
                 bundleData.entities.map((i) => i.raw),
-                JSON.stringify(state),
+                JSON.stringify(state?.state),
                 undefined,
                 false,
                 bundleElement.isExmFunctionExmDeployed,
