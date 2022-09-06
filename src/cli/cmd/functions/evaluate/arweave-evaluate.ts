@@ -1,7 +1,7 @@
 import {ArweaveReader, Paginator} from "./readers/arweave/arweave-reader";
 import {buildContext, CommonEvaluateOpts} from "./common";
 import {cacheBundle} from "./fetch-bundle";
-import {runExmdApp} from "./app-simulator";
+import {runExmFunction} from "./app-simulator";
 
 export const arweaveEvaluate = async (opts: CommonEvaluateOpts) => {
     const arweaveReader = new ArweaveReader();
@@ -25,18 +25,20 @@ export const arweaveEvaluate = async (opts: CommonEvaluateOpts) => {
 
         for (const bundleElement of bundles) {
             let bundleData = await cacheBundle(bundleElement.id, opts.cache);
-            state = (await runExmdApp(bundleElement.threeEmExecutorVersion)(
-                opts.exmFunctionId,
-                bundleData.entities.map((i) => i.raw),
-                JSON.stringify(state?.state),
-                undefined,
-                false,
-                bundleElement.isExmFunctionExmDeployed,
-                {
+            const run = await runExmFunction({
+                version: bundleElement.threeEmExecutorVersion,
+                contractId: opts.exmFunctionId,
+                interactions: bundleData.entities.map((i) => i.raw),
+                contractInitState: JSON.stringify(state?.state),
+                maybeConfig: undefined,
+                maybeCache: false,
+                maybeBundledContract: bundleElement.isExmFunctionExmDeployed,
+                maybeSettings: {
                     'LAZY_EVALUATION': true
                 },
-                buildContext(bundleData.exmContext)
-            ));
+                maybeExmContext: buildContext(bundleData.exmContext)
+            });
+            state = run;
         }
 
         if(bundles.length <= 0) {

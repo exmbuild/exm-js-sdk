@@ -3,6 +3,13 @@ import {postRequest} from "../utils/commons";
 import {WriteAction, WriteOpBody, WriteOpResult} from "../model";
 import {WriteOpFailure} from "../exceptions/writeOpFailure";
 
+const inputToString = (input: any) => {
+    if(typeof input !== 'string') {
+        input = JSON.stringify(input);
+    }
+    return input;
+}
+
 const cleanInput = (writeAction: WriteAction) => {
     if(!writeAction.input) {
         throw new Error(`Property 'input' is required in a write operation`);
@@ -10,6 +17,8 @@ const cleanInput = (writeAction: WriteAction) => {
     if(!writeAction.tags) {
         writeAction.tags = [];
     }
+
+    writeAction.input = inputToString(writeAction.input);
 
     return writeAction;
 }
@@ -46,9 +55,9 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: any,
         inputs = Array.isArray(writeOpsScope) ? writeOpsScope : [writeOpsScope];
     } else {
         if(Array.isArray(writeOps)) {
-            inputs = writeOps.map((i) => ({ input: i, tags: [] }));
+            inputs = writeOps.map((i) => ({ input: inputToString(i), tags: [] }));
         } else {
-            inputs = [{ input: writeOps, tags: [] }]
+            inputs = [{ input: inputToString(writeOps), tags: [] }]
         }
     }
 

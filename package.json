@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.33",
+  "version": "0.1.34",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,6 +31,7 @@
     "find-cache-dir": "^3.3.2",
     "isomorphic-fetch": "^3.0.0",
     "prompt-confirm": "^2.0.4",
+    "three-em-0-3-13": "npm:@three-em/node@^0.3.13",
     "three-em-0-3-12": "npm:@three-em/node@^0.3.12",
     "three-em-0-3-09": "npm:@three-em/node@^0.3.09"
   }
