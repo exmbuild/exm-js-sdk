@@ -6,14 +6,8 @@ import {WriteOpFailure} from "../exceptions/writeOpFailure";
 const inputToString = (input: any) => {
     if(typeof input !== 'string') {
         input = JSON.stringify(input);
-    } else {
-        try {
-            const parse = JSON.parse(input);
-            input = JSON.stringify(parse);
-        } catch {
-            throw new Error('Input does not contain a valid JSON value');
-        }
     }
+
     return input;
 }
 
