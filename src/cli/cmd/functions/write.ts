@@ -13,7 +13,8 @@ export const functionWriteCmd = async (txId: string, opts: any) => {
     let input: any;
 
     try {
-        input = JSON.parse(opts.input);
+        const parsedInput = JSON.parse(opts.input);
+        input = JSON.stringify(parsedInput);
     } catch(e) {
         input = opts.input;
     }

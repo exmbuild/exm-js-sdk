@@ -6,6 +6,13 @@ import {WriteOpFailure} from "../exceptions/writeOpFailure";
 const inputToString = (input: any) => {
     if(typeof input !== 'string') {
         input = JSON.stringify(input);
+    } else {
+        try {
+            const parse = JSON.parse(input);
+            input = JSON.stringify(parse);
+        } catch {
+            throw new Error('Input does not contain a valid JSON value');
+        }
     }
     return input;
 }
@@ -35,7 +42,7 @@ const cleanInput = (writeAction: WriteAction) => {
  * @param emToken EM Token to authenticate request
  * @param raw Whether it's a write input or an input to be constructed.
  */
-export const writeFunction = async <T = any> (functionId: string, writeOps: any, emToken: string, raw: boolean): Promise<WriteOpResult<T>> => {
+export const writeFunction = async <T = any> (functionId: string, writeOps: WriteAction[] | any, emToken: string, raw: boolean): Promise<WriteOpResult<T>> => {
     let body: Partial<WriteOpBody> = {
         functionId
     };
