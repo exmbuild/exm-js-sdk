@@ -10,3 +10,11 @@ export interface DeployOpts {
     token?: string;
     type?: "wasm" | "js" | "evm" | ContractType;
 }
+
+export interface FunctionTestOpts {
+    src?: string;
+    input: Array<string>
+    initState?: string
+    initStateSrc?: string;
+    type?: string;
+}
