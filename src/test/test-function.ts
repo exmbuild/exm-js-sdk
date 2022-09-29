@@ -34,7 +34,10 @@ export const TestFunction = async (opts: TestFunctionOpts) => {
         },
         contractInitState: JSON.stringify(opts.contractInitState),
         maybeConfig: opts.gatewayConfig,
-        maybeSettings: opts.settings,
+        maybeSettings: {
+            ...(opts.settings || {}),
+            'TX_DATE': `${new Date().getTime()}`
+        },
         maybeExmContext: opts.exmContext,
         interactions: opts.writes,
         maybeCache: false
