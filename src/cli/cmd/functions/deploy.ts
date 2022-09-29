@@ -3,6 +3,8 @@ import {DeployOpts} from "./model";
 import {TextDecoder, TextEncoder} from "util";
 import {ContractType, Tag} from "../../../common/model";
 import {em} from "../em-wrapper";
+import {error} from "../../utils/common";
+import {figureOutContractType} from "../../../common/utils/commons";
 
 const Arweave = require('arweave');
 const Confirm = require('prompt-confirm');
@@ -28,48 +30,12 @@ const initContract = async (initState: string, contractTxId: string, wallet: any
     }];
 }
 
-const error = (message: string) => {
-    console.error(message);
-    process.exit(1);
-}
-
 const successfulDeployment = (sourceTxId: string, initTxId: string) => {
     console.log("Function deployed 🎉\n");
     console.log(`EXM Function ID: ${initTxId}`);
     console.log("EXM Function Source Code:", "https://arweave.net/tx/" + sourceTxId);
     console.log("EXM Function:", "https://arweave.net/tx/" + initTxId);
     console.log(`\nUse Function Id ${initTxId} as your interaction reference.`);
-}
-
-const figureOutContractType = (input: string | undefined, byType: boolean): ContractType => {
-    let contentType: ContractType = ContractType.JS;
-    if(input) {
-        const lowerCaseInput = input.toLowerCase();
-
-        if (byType) {
-            switch (lowerCaseInput) {
-                case "wasm":
-                    contentType = ContractType.WASM;
-                    break;
-                case "evm":
-                    contentType = ContractType.EVM;
-                    break;
-                case "js":
-                    contentType = ContractType.JS;
-                    break;
-            }
-        } else {
-            if (lowerCaseInput.endsWith(".js")) {
-                contentType = ContractType.JS;
-            } else if (lowerCaseInput.endsWith(".wasm")) {
-                contentType = ContractType.WASM;
-            } else {
-                contentType = ContractType.JS;
-            }
-        }
-    }
-
-    return contentType;
 }
 
 export const functionDeployCmd = async (opts: DeployOpts) => {

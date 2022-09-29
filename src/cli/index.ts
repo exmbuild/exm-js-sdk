@@ -3,6 +3,7 @@ import {functionReadCmd} from "./cmd/functions/read";
 import {functionWriteCmd} from "./cmd/functions/write";
 import {functionDeployCmd} from "./cmd/functions/deploy";
 import {evaluateExmFunction} from "./cmd/functions/evaluate/evaluate";
+import {functionTest} from "./cmd/functions/function-test";
 
 const program = new Command();
 
@@ -30,11 +31,11 @@ program.command('function:deploy')
     .alias('fx:d')
     .description('Deploy a EXM compatible function to Arweave.')
     .option('-w, --wallet <value>', 'Path to wallet to be used during deployment.')
-    .option('-s, --src <value>', 'Path to source contract of function. Example: /Documents/contract.wasm .')
+    .option('-s, --src <value>', 'Path to source code of function. Example: /Documents/contract.wasm .')
     .option('--contract-tx <value>', 'ID of Source Contract already deployed to Arweave.')
     .option('-i, --init-state <value>', 'Init State for contract to be deployed under init contract.')
     .option('--init-state-src <value>', 'Path to init state file.')
-    .option('-t, --type <value>', 'Type of smart contract to be deployed.')
+    .option('-t, --type <value>', 'Type of function to be deployed.')
     .option('-t, --token <value>', 'Execution Machine API Token to be used.')
     .option('--use-arweave', 'Deploy function through Arweave and not EXM')
     .action(functionDeployCmd);
@@ -44,5 +45,16 @@ program.command('function:evaluate')
     .description('Evaluates the state of an EXM application')
     .argument('<txId>', 'ID of deployed function')
     .action(evaluateExmFunction);
+
+program.command('function:test')
+    .alias('fx:t')
+    .description('Test a function inside a simulated EXM environment')
+    .option('-s, --src <value>', 'Path to source code of function. Example: /Documents/function.js')
+    .option('--init-state <value>', 'JSON value containing the initial state of the function')
+    .option('--init-state-src <value>', 'Path to init state file.')
+    .option('-t, --type <value>', 'Type of function to be deployed.')
+    .option('-i, --input <value>', `Inputs to be used during evaluation. Usage: --input '{\"someProperty\":\"value\"} --input '{}'`, (value: string, previous: string[]) => previous.concat([value]), [])
+    // @ts-ignore
+    .action(functionTest);
 
 program.parse(process.argv);
