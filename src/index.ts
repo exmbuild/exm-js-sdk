@@ -5,3 +5,4 @@ export * from './common/functions/read';
 export * from './common/functions/deploy';
 export * from './common/exceptions/readFailure';
 export * from './common/exceptions/writeOpFailure';
+export * from './test/test-function';
