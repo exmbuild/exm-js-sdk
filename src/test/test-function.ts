@@ -1,13 +1,16 @@
-import {ExecuteConfig, simulateContract, SimulateContractType, SimulateInput, Tag} from "three-em-0-3-14";
+import {ExecuteConfig, simulateContract, SimulateContractType as ContractType, SimulateInput, Tag} from "three-em-0-3-14";
 import {guidGenerator} from "../common/utils/commons";
 
-export { SimulateContractType as SimulateContractType };
+// @ts-ignore
+export const SimulateContractType = Object.assign({}, ContractType);
+export type SimulateContractType = ContractType;
+
 export type WriteInput = SimulateInput;
 export type ExecutionConfig = ExecuteConfig;
 
 export interface TestFunctionOpts {
     contractSource: Uint8Array,
-    contractType: SimulateContractType,
+    contractType: ContractType,
     contractInitState: any;
     writes: WriteInput[];
     gatewayConfig?: ExecutionConfig
