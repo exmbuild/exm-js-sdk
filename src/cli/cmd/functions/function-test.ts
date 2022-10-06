@@ -34,9 +34,9 @@ export const functionTest = async (opts: FunctionTestOpts) => {
 
     const writeOperations = opts.input.map((input) => createWrite(input, [], undefined, true));
     const testFunction = await TestFunction({
-        contractType: contractType == ContractType.WASM ? SimulateContractType.WASM : SimulateContractType.JAVASCRIPT,
-        contractInitState: JSON.parse(initState),
-        contractSource: bufferSource,
+        functionType: contractType == ContractType.WASM ? SimulateContractType.WASM : SimulateContractType.JAVASCRIPT,
+        functionInitState: JSON.parse(initState),
+        functionSource: bufferSource,
         writes: writeOperations
     });
 

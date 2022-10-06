@@ -2,16 +2,16 @@ import {ExecuteConfig, simulateContract, SimulateContractType as ContractType, S
 import {guidGenerator} from "../common/utils/commons";
 
 // @ts-ignore
-export const SimulateContractType = Object.assign({}, ContractType);
-export type SimulateContractType = ContractType;
+export const FunctionType = Object.assign({}, ContractType);
+export type FunctionType = ContractType;
 
 export type WriteInput = SimulateInput;
 export type ExecutionConfig = ExecuteConfig;
 
 export interface TestFunctionOpts {
-    contractSource: Uint8Array,
-    contractType: ContractType,
-    contractInitState: any;
+    functionSource: Uint8Array,
+    functionType: FunctionType,
+    functionInitState: any;
     writes: WriteInput[];
     gatewayConfig?: ExecutionConfig
     settings?: Record<string, any> | undefined | null,
@@ -36,10 +36,10 @@ export const TestFunction = async (opts: TestFunctionOpts) => {
         contractId: "",
         maybeContractSource: {
             // @ts-ignore
-            contractSrc: opts.contractSource,
-            contractType: opts.contractType
+            contractSrc: opts.functionSource,
+            contractType: opts.functionType
         },
-        contractInitState: JSON.stringify(opts.contractInitState),
+        contractInitState: JSON.stringify(opts.functionInitState),
         maybeConfig: opts.gatewayConfig,
         maybeSettings: {
             ...(opts.settings || {}),
