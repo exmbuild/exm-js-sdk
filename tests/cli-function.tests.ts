@@ -1,4 +1,6 @@
 import {functionTest} from "../src/cli/cmd/functions/function-test";
+import {TestFunction, FunctionType, createWrite} from "../src";
+import {readFileSync} from "fs";
 
 describe('CLI Functions module', () => {
 
@@ -42,5 +44,16 @@ describe('CLI Functions module', () => {
          ]
       });
    });
+
+   test('Function from import', async () => {
+      const testUserRegistry = TestFunction({
+         functionSource: readFileSync("./tests/testdata/user-registry.js"),
+         functionType: FunctionType.JAVASCRIPT,
+         functionInitState: {
+            users: []
+         },
+         writes: [createWrite({ username: "Andres" })]
+      })
+   })
 
 });

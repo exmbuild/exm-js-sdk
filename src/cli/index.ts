@@ -9,7 +9,7 @@ const program = new Command();
 
 program.name('exm')
        .description('A CLI to interact with the Execution Machine.')
-       .version('0.1.0');
+       .version('0.1.5');
 
 program.command('function:read')
 .alias('fx:r')
@@ -30,14 +30,12 @@ program.command('function:write')
 program.command('function:deploy')
     .alias('fx:d')
     .description('Deploy a EXM compatible function to Arweave.')
-    .option('-w, --wallet <value>', 'Path to wallet to be used during deployment.')
     .option('-s, --src <value>', 'Path to source code of function. Example: /Documents/function.wasm .')
     .option('--contract-tx <value>', 'ID of Source Function already deployed to Arweave.')
     .option('-i, --init-state <value>', 'Init State for Function to be deployed under init function.')
     .option('--init-state-src <value>', 'Path to init state file.')
     .option('-t, --type <value>', 'Type of function to be deployed.')
     .option('-t, --token <value>', 'Execution Machine API Token to be used.')
-    .option('--use-arweave', 'Deploy function through Arweave and not EXM')
     .action(functionDeployCmd);
 
 program.command('function:evaluate')

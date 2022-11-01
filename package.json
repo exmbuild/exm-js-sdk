@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.42",
+  "version": "0.1.5",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,8 @@
   "homepage": "https://github.com/exmbuild/exm-js-sdk#readme",
   "dependencies": {
     "@types/node": "^18.0.0",
-    "arweave": "^1.11.4",
+    "chalk": "^4.1.2",
+    "cli-box": "^6.0.10",
     "commander": "^9.3.0",
     "dotenv": "^16.0.1",
     "find-cache-dir": "^3.3.2",
@@ -34,7 +35,8 @@
     "three-em-0-3-09": "npm:@three-em/node@^0.3.09",
     "three-em-0-3-12": "npm:@three-em/node@^0.3.12",
     "three-em-0-3-13": "npm:@three-em/node@^0.3.13",
-    "three-em-0-3-14": "npm:@three-em/node@^0.3.14"
+    "three-em-0-3-14": "npm:@three-em/node@^0.3.14",
+    "three-em-0-3-15": "npm:@three-em/node@^0.3.15"
   },
   "devDependencies": {
     "@types/jest": "^29.1.0",
