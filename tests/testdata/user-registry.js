@@ -7,5 +7,5 @@
 export async function handle(state, action) {
     const { username } = action.input;
     state.users.push({ username });
-    return state;
+    return { state };
 }
