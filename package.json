@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,7 +36,8 @@
     "three-em-0-3-12": "npm:@three-em/node@^0.3.12",
     "three-em-0-3-13": "npm:@three-em/node@^0.3.13",
     "three-em-0-3-14": "npm:@three-em/node@^0.3.14",
-    "three-em-0-3-15": "npm:@three-em/node@^0.3.15"
+    "three-em-0-3-15": "npm:@three-em/node@^0.3.15",
+    "three-em-0-3-16": "npm:@three-em/node@^0.3.16"
   },
   "devDependencies": {
     "@types/jest": "^29.1.0",

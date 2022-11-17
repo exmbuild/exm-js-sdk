@@ -1,4 +1,4 @@
-import {simulateContract, SimulateExecutionContext} from "three-em-0-3-15";
+import {simulateContract, SimulateExecutionContext} from "three-em-0-3-16";
 
 export interface ExmRunContext extends SimulateExecutionContext {
     version: string;
@@ -21,6 +21,9 @@ export const runExmFunction = (context: ExmRunContext) => {
         return simulateContract(context);
     } else if(isVersion(context.version)('0.3.15')) {
         const simulateContract = require('three-em-0-3-15').simulateContract;
+        return simulateContract(context);
+    } else if(isVersion(context.version)('0.3.16')) {
+        const simulateContract = require('three-em-0-3-16').simulateContract;
         return simulateContract(context);
     } else {
         const simulateContract = require('three-em-0-3-09').simulateContract;

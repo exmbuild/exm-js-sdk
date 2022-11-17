@@ -24,8 +24,8 @@ export class Exm {
      */
     get functions() {
         return {
-            writeRaw: async <T = any>(functionId: string, writeOps: Array<WriteAction> | WriteAction) => writeFunction<T>(functionId, writeOps, this.opts.token, true),
-            write: async <T = any>(functionId: string, inputs: any | Array<any>) => writeFunction<T>(functionId, inputs, this.opts.token, false),
+            writeRaw: async <T = any>(functionId: string, writeOps: Array<WriteAction> | WriteAction, ignoreState?: boolean) => writeFunction<T>(functionId, writeOps, this.opts.token, ignoreState, true),
+            write: async <T = any>(functionId: string, inputs: any | Array<any>, ignoreState?: boolean) => writeFunction<T>(functionId, inputs, this.opts.token, ignoreState, false),
             read: async <T = any>(functionId: string) => readFunction<T>(functionId),
             deploy: async(contractSrc: Uint8Array, contractInitState: any, contractType: ContractType, opts?: DeployOpts) => deployFunction(contractSrc, contractInitState, contractType, this.opts.token, opts)
         }

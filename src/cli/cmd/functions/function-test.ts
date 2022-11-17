@@ -4,7 +4,7 @@ import {readFileSync} from "fs";
 import {figureOutContractType} from "../../../common/utils/commons";
 import {createWrite, TestFunction} from "../../../test/test-function";
 import {ContractType} from "../../../common/model";
-import {SimulateContractType} from "three-em-0-3-15";
+import {SimulateContractType} from "three-em-0-3-16";
 
 export const functionTest = async (opts: FunctionTestOpts) => {
     if(!opts.src) {

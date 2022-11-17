@@ -34,9 +34,10 @@ const cleanInput = (writeAction: WriteAction) => {
  * @param functionId The function ID (An Arweave valid TX id) to be processed
  * @param writeOps A single operation or an array of operations to be sent. Note a limit of 499 write operations are enforced.
  * @param emToken EM Token to authenticate request
+ * @param ignoreState Whether optimistic state should not be returned
  * @param raw Whether it's a write input or an input to be constructed.
  */
-export const writeFunction = async <T = any> (functionId: string, writeOps: WriteAction[] | any, emToken: string, raw: boolean): Promise<WriteOpResult<T>> => {
+export const writeFunction = async <T = any> (functionId: string, writeOps: WriteAction[] | any, emToken: string, ignoreState: boolean | undefined, raw: boolean): Promise<WriteOpResult<T>> => {
     let body: Partial<WriteOpBody> = {
         functionId
     };
@@ -68,7 +69,12 @@ export const writeFunction = async <T = any> (functionId: string, writeOps: Writ
         throw new WriteOpFailure("Only 499 writes are allowed in a single query.");
     }
 
-    const data = await postRequest(`${EmVars.EM_BACKEND_URL}/transactions?token=${emToken}`, body);
+    let reqUrl = `${EmVars.EM_BACKEND_URL}/transactions?token=${emToken}`;
+    if(ignoreState) {
+        reqUrl = `${reqUrl}&ignoreState=true`;
+    }
+
+    const data = await postRequest(reqUrl, body);
     let bodyJson: any = await data.json();
 
     if(data.ok) {
