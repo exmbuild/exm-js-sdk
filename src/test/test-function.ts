@@ -1,4 +1,4 @@
-import {ExecuteConfig, simulateContract, SimulateContractType as ContractType, SimulateInput, Tag} from "three-em-0-3-16";
+import {ExecuteConfig, simulateContract, SimulateContractType as ContractType, SimulateInput, Tag} from "three-em-0-3-20";
 import {guidGenerator} from "../common/utils/commons";
 
 // @ts-ignore

@@ -25,6 +25,12 @@ export const runExmFunction = (context: ExmRunContext) => {
     } else if(isVersion(context.version)('0.3.16')) {
         const simulateContract = require('three-em-0-3-16').simulateContract;
         return simulateContract(context);
+    } else if(isVersion(context.version)('0.3.17')) {
+        const simulateContract = require('three-em-0-3-16').simulateContract;
+        return simulateContract(context);
+    } else if(isVersion(context.version)('0.3.20')) {
+        const simulateContract = require('three-em-0-3-16').simulateContract;
+        return simulateContract(context);
     } else {
         const simulateContract = require('three-em-0-3-09').simulateContract;
         return simulateContract(context.contractId, context.interactions, context.contractInitState, context.maybeConfig, context.maybeCache, context.maybeBundledContract, context.maybeSettings, context.maybeExmContext);
