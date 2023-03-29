@@ -1,6 +1,6 @@
 {
   "name": "@execution-machine/sdk",
-  "version": "0.1.81",
+  "version": "0.1.9",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
